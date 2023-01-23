@@ -1,0 +1,39 @@
+    if not Player.PlayerGui.TradeApp.Frame.Visible then
+                ReplicatedStorage.API:FindFirstChild("TradeAPI/SendTradeRequest"):FireServer(Settings.Playt)
+            end 
+            if Player.PlayerGui.TradeApp.Frame.Visible then
+                if Settings.Petsd == "Pets" then
+                    for i, v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets) do
+                        ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
+                    end
+                end 
+                if Settings.Petsd == "GrownPets" then
+                    for i, v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets) do
+                        if v["properties"]["age"] == 6 then
+                            ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
+                        end 
+                    end
+                end 
+                if Settings.Petsd == "Eggs" then
+                    for i, v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets) do
+                        if v["id"]:find("egg") and not v["id"]:find("_2022") then
+                            ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
+                        end 
+                    end
+                end 
+                if Settings.Petsd == "Gifts" then
+                    for i,v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.gifts) do
+                        ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
+                    end 
+                end 
+                ReplicatedStorage.API:FindFirstChild("TradeAPI/AcceptNegotiation"):FireServer()
+                ReplicatedStorage.API:FindFirstChild("TradeAPI/ConfirmTrade"):FireServer()
+                for i,v in pairs(getconnections(Player.PlayerGui.DialogApp.Dialog.NormalDialog.Buttons.ButtonTemplate.MouseButton1Click)) do
+                    v.Function()
+                    v:Fire()
+                end 
+            end 
+        end)
+    end 
+end)
+end)
