@@ -22,6 +22,7 @@ repeat
 until game:IsLoaded()
 
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G_Hub_Extras/main/Universal_Client_Bypass"))()
 local A = loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.G-Hub-Games-List"))()
 getgenv().Get =
     setmetatable(
@@ -81,7 +82,7 @@ local queue_on_teleport =
     syn and
         syn.queue_on_teleport [[
        repeat wait() until game:IsLoaded() wait(5) print("ServerHoped or rejoined")
-       
+       loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/littlegui/main/V.G-Hubs-Source'))()]]
 
 for i, v in pairs(Games) do
     if i == game.PlaceId then
