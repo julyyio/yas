@@ -1,15 +1,4 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("TITLE", "DarkTheme")
-
-
-local Tab = Window:NewTab("TabName")
-local Section = Tab:NewSection("Section Name")
-local Toggle = Section1:CreateToggle("Auto Accept Auto Trade", Settings.Lololol, function(State)
-Settings.Lololol = State
-spawn(function()
-    while Settings.Lololol do wait()
-        pcall(function()
-            for i,v in pairs(Players:GetPlayers()) do
+for i,v in pairs(Players:GetPlayers()) do
                 if v ~= Player then
                     ReplicatedStorage.API:FindFirstChild("TradeAPI/AcceptOrDeclineTradeRequest"):InvokeServer(v,true)
                 end 
@@ -24,71 +13,3 @@ spawn(function()
     end 
 end)
 end)
-local Toggle = Section1:CreateToggle("Auto Trade Pets To Selected Player", nil, function(State)
-Settings.YouTube = State
-spawn(function()
-    while Settings.YouTube and wait(1) do
-        pcall(function()
-            if not Player.PlayerGui.TradeApp.Frame.Visible then
-                ReplicatedStorage.API:FindFirstChild("TradeAPI/SendTradeRequest"):FireServer(Settings.Playt)
-            end 
-            if Player.PlayerGui.TradeApp.Frame.Visible then
-                if Settings.Petsd == "Pets" then
-                    for i, v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets) do
-                        ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
-                    end
-                   Section1:CreateTextBox("Auto Trade or Auto Buy Person Name", "UserName Here", false, function(String)
-for i,v in pairs(Players:GetPlayers()) do
-    if v.Name == (String) or v.Name:find(String) or v.DisplayName == String or v.DisplayName:find(String) then
-       Settings.Playt = v
-    end 
-end 
-end)
-
-                end 
-                if Settings.Petsd == "GrownPets" then
-                    for i, v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets) do
-                        if v["properties"]["age"] == 6 then
-                            ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
-                        end 
-                    end
-                end 
-                if Settings.Petsd == "Eggs" then
-                    for i, v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets) do
-                        if v["id"]:find("egg") and not v["id"]:find("_2022") then
-                            ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
-                        end 
-                    end
-                end 
-                if Settings.Petsd == "Gifts" then
-                    for i,v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.gifts) do
-                        ReplicatedStorage.API:FindFirstChild("TradeAPI/AddItemToOffer"):FireServer(v.unique)
-                    end 
-                end 
-                ReplicatedStorage.API:FindFirstChild("TradeAPI/AcceptNegotiation"):FireServer()
-                ReplicatedStorage.API:FindFirstChild("TradeAPI/ConfirmTrade"):FireServer()
-                for i,v in pairs(getconnections(Player.PlayerGui.DialogApp.Dialog.NormalDialog.Buttons.ButtonTemplate.MouseButton1Click)) do
-                    v.Function()
-                    v:Fire()
-                end 
-            end 
-        end)
-    end 
-end)
-end)
-
-Section1:CreateTextBox("Auto Trade or Auto Buy Person Name", "UserName Here", false, function(String)
-for i,v in pairs(Players:GetPlayers()) do
-    if v.Name == (String) or v.Name:find(String) or v.DisplayName == String or v.DisplayName:find(String) then
-       Settings.Playt = v
-    end 
-end 
-end)
-
-local Dropdown = Section1:CreateDropdown("Auto Trade Options", {"Pets","Gifts","GrownPets","Eggs"}, function(Name)
-    Settings.Petsd = Name 
-end)
-
-local Button1 = Section1:CreateButton("Grab Trading Linence", function()
-GoToStore("SafetyHub")
-ReplicatedStorage.API:FindFirstChild("TradeAPI/BeginQuiz"):FireServer()
