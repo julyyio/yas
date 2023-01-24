@@ -1937,3 +1937,33 @@ local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value
 	Window:SetTileScale(Value)
 end)
 Slider4:SetValue(0.5)
+
+wait(60)
+
+--Preloader Script by @PirateCaptn7 on ROBLOX
+--Add the GUI in this script
+local ReplicatedStorage = game:GetService('ReplicatedStorage') -- useless
+local ReplicatedFirst = game:GetService('ReplicatedFirst') -- get replicatedfirst
+local ContentProvider = game:GetService("ContentProvider") -- get contentprovider in this video it will help to load assets of the games
+ 
+local Assets = game:GetDescendants() -- this get all the descendants of the game means all children of children etc.. so all assets.
+ 
+local UI1 = script.LoadUI:Clone() -- it clone the GUI that is in the script so i can copy later for the loading
+ 
+local Player = game.Players.LocalPlayer -- it get the local player the one playing
+local PlayerGui = Player:WaitForChild("PlayerGui") -- it his GUI so i can put the loading in here
+ 
+ReplicatedFirst:RemoveDefaultLoadingScreen() -- i forget to add this, it remove default loading of roblox
+ 
+repeat wait(999) -- wait til loads because sometimes it makes mistakes.
+ 
+UI1.Parent = PlayerGui -- it put the gui into playergui so he can see it
+ 
+for i = 1, #Assets do -- from index 1 to the last asset number, it does
+    local asset = Assets[i] -- here is to get the current asset loading
+ 
+    ContentProvider:PreloadAsync({asset}) -- load the asset into the game
+    UI1.LoadTxt.Text = "Loading: "..asset.Name.." ["..i.."/"..#Assets.."]" -- show his name and the current progress
+end
+ 
+print("Done") -- when it's finish shows into the console/output "done".
